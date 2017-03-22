@@ -1,0 +1,43 @@
+<form name="survey{{survey.id}}" id="survey{{survey.id}}" ng-submit="submitSurvey()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>{{survey.name}}</h3>
+            <div ng-repeat="question in survey.questions track by question.id">
+                <div ng-switch="question.type">
+                    <div ng-switch-when="singleAnswer">
+                        <single-answer-question
+                            question-text="{{question.text}}"
+                            question-id="{{question.id}}"
+                            question-answers="question.answers"
+                            question-color="{{question.color}}"
+                        ></single-answer-question>
+                    </div>
+                    <div ng-switch-when="multyAnswer">
+                        <multy-answer-question
+                            question-text="{{question.text}}"
+                            question-id="{{question.id}}"
+                            question-answers="question.answers"
+                            question-color="{{question.color}}"
+                        ></multy-answer-question>
+                    </div>
+                    <div ng-switch-when="scaledAnswer">
+                        <scaled-answer-question
+                            question-text="{{question.text}}"
+                            question-id="{{question.id}}"
+                            scale-length="{{question.scaleLength}}"
+                            question-color="{{question.color}}"
+                        ></scaled-answer-question>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit"
+                class="btn btn-success btn-lg"
+                ng-disabled="survey{{survey.id}}.$pristine || survey{{survey.id}}.$invalid"
+            >
+                I'm done, send answers!
+            </button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Aggregated answers</h3>
+        <div ng-repeat="(questionType, questions) in aggregatedData">
+            <div class="panel panel-default" ng-repeat="(questionId, answers) in questions">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{$ctrl.questionMicroservice.getQuestionLabelByGuid(questionId)}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-repeat="(answer, count) in answers track by $index">
+                        {{$ctrl.answerMicroservice.getAnswerLabelByGuid(answer) || answer}}
+                        <uib-progressbar value="count">{{count}}</uib-progressbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
